@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
-
-using Framework;
 using UnityEditor;
+
+using Framework.Gameplay;
 
 namespace Editor.Drawers
 {

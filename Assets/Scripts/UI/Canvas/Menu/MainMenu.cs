@@ -7,7 +7,7 @@ namespace UI.Canvas.Menu
     /// </summary>
     public sealed class MainMenu : MonoBehaviour
     {
-        private const string GITHUB_REPO = "https://github.com/bas-boop";
+        private const string GITHUB_REPO = "https://github.com/bas-boop/CathSpaceTrash";
         
         public void OpenGithub() => Application.OpenURL(GITHUB_REPO);
 

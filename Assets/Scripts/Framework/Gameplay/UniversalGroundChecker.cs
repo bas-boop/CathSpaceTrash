@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Framework
+namespace Framework.Gameplay
 {
     /// <summary>
     /// Universal ground checker supporting 2D and 3D environments with line and sphere casts.
@@ -13,7 +13,7 @@ namespace Framework
         #region SerializeField fields
         
         [Header("Usage")]
-        [SerializeField, Tooltip("True for 3D settings.\nFalse for 2D settings.")] private bool is3D = true;
+        [SerializeField, Tooltip("True for 3D settings.\nFalse for 2D settings.")] private bool is3D = false;
         [SerializeField, Tooltip("True for line.\nFalse for sphere.")] private bool lineOrSphere = true;
         [SerializeField, Tooltip("True for offset.\nFalse for transform.")] private bool offSetOrTransform;
         
@@ -70,6 +70,9 @@ namespace Framework
             HandleStateTransitions();
         }
 
+        /// <summary>
+        /// Set the position of the ground checker and checking it.
+        /// </summary>
         private void CalculateGroundRayCasting()
         {
             if (is3D)
@@ -85,6 +88,10 @@ namespace Framework
             IsGrounded = GetGround();
         }
 
+        /// <summary>
+        /// In many ways will detect if there is ground.
+        /// </summary>
+        /// <returns>If there is any ground in range</returns>
         private bool GetGround()
         {
             return lineOrSphere 
@@ -100,6 +107,9 @@ namespace Framework
                         ?.Any(collider => collider.gameObject != gameObject) ?? false;
         }
         
+        /// <summary>
+        /// When on or off the ground the state will change.
+        /// </summary>
         private void HandleStateTransitions()
         {
             _currentState = IsGrounded ? GroundedState.GROUNDED : GroundedState.AIRED;
@@ -119,6 +129,9 @@ namespace Framework
             }
         }
         
+        /// <summary>
+        /// Shows a gizmos of the ground checker.
+        /// </summary>
         private void OnDrawGizmos()
         {
             if (!gizmos)

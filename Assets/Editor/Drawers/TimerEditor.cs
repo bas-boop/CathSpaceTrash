@@ -48,7 +48,7 @@ namespace Editor.Drawers
             _timerThreshold = serializedObject.FindProperty("timerThreshold");
             _canCount = serializedObject.FindProperty("canCount");
             _canCountOnStart = serializedObject.FindProperty("canCountOnStart");
-            _onTimerDone = serializedObject.FindProperty("onTimerDone");
+            _onTimerDone = serializedObject.FindProperty("OnTimerDone");
             _onTimerPassedThreshold = serializedObject.FindProperty("onTimerPassedThreshold");
             _onStart = serializedObject.FindProperty("onStart");
             _onReset = serializedObject.FindProperty("onReset");

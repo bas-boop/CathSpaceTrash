@@ -6,6 +6,9 @@ namespace Framework
     {
         private static T _instance;
 
+        /// <summary>
+        /// Get the existing instance of this singleton object.
+        /// </summary>
         public static T Instance
         {
             get
@@ -18,7 +21,7 @@ namespace Framework
                 if (_instance != null) 
                     return _instance;
                 
-                GameObject singletonObject = new GameObject(typeof(T).Name);
+                GameObject singletonObject = new (typeof(T).Name);
                 _instance = singletonObject.AddComponent<T>();
                 DontDestroyOnLoad(singletonObject);
 

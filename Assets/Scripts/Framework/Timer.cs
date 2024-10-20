@@ -18,7 +18,7 @@ namespace Framework
 
         #region Events
 
-        [SerializeField] private UnityEvent onTimerDone = new();
+        [field: SerializeField] public UnityEvent OnTimerDone { get; private set; } = new();
         [SerializeField] private UnityEvent onTimerPassedThreshold = new();
         [SerializeField] private UnityEvent onStart = new();
         [SerializeField] private UnityEvent onReset = new();
@@ -37,6 +37,13 @@ namespace Framework
 
         private void Update() => Counting();
 
+        public void StartCounting()
+        {
+            canCount = true;
+            _currentTimer = startingTime;
+            _isStarting = true;
+        }
+        
         /// <summary>
         /// Reset the timer to startingTime and calls the onReset event.
         /// </summary>
@@ -90,7 +97,7 @@ namespace Framework
             {
                 case false
                     when _currentTimer <= 0:
-                    onTimerDone?.Invoke();
+                    OnTimerDone?.Invoke();
                     SetCanCount(false);
                     break;
                 case true

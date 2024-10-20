@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 5b30ec117b0c5f642888734797a3cc46
+  - enabled: 1
+    path: Assets/Scenes/Testing/ChracterCreation.unity
+    guid: 917266425551d794280bcb62cbdef469
   m_configObjects: {}
