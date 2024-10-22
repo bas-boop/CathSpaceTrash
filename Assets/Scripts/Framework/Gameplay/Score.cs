@@ -6,8 +6,18 @@ namespace Framework.Gameplay
     public sealed class Score : MonoBehaviour
     {
         [SerializeField] private int score;
-        [SerializeField] private UnityEvent onScoreUpdate = new();
+        [SerializeField] private int scoreThreshold;
+        
+        [SerializeField, Space(20)] private UnityEvent onScoreUpdate = new();
+        [SerializeField] private UnityEvent onGameWon = new();
+        [SerializeField] private UnityEvent onGameLose = new();
 
+        public void CheckIfWon()
+        {
+            UnityEvent gameStateEvent = score >= scoreThreshold ? onGameWon : onGameLose;
+            gameStateEvent?.Invoke();
+        }
+        
         public void IncreaseScore()
         {
             score++;

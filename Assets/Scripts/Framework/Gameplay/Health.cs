@@ -61,8 +61,12 @@ namespace Framework.Gameplay
             _currentHealth = targetHealth ?? health;
             onResurrect?.Invoke();
         }
+        
+        public void AddListenerToDieEvent(UnityAction target) => onDie.AddListener(target);
 
-        public void Die()
+        public void DestroySelf() => Destroy(gameObject);
+
+        private void Die()
         {
             _currentHealth = 0;
             onDie?.Invoke();

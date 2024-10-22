@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+using Framework;
+
 namespace Player
 {
     /// <summary>
@@ -12,7 +14,7 @@ namespace Player
     public sealed class InputParser : MonoBehaviour
     {
         private PlayerInput _playerInput;
-        private InputActionAsset _inputActionAsset;
+        private InputActionMap _playerControlsActions;
         
         private Movement _movement;
         private Turner _turner;
@@ -26,16 +28,23 @@ namespace Player
 
         private void FixedUpdate()
         {
-            Vector2 moveInput = _inputActionAsset["Move"].ReadValue<Vector2>();
+            Vector2 moveInput = _playerControlsActions["Move"].ReadValue<Vector2>();
             _movement.Move(moveInput);
 
-            float turnInput = _inputActionAsset["Turn"].ReadValue<float>();
+            float turnInput = _playerControlsActions["Turn"].ReadValue<float>();
             _turner.Turn(turnInput);
         }
 
         private void OnEnable() => AddListeners();
         
         private void OnDisable() => RemoveListeners();
+
+        public void SwitchActionMap()
+        {
+            RemoveListeners();
+            Init();
+            AddListeners();
+        }
         
         private void GetReferences()
         {
@@ -47,22 +56,29 @@ namespace Player
 
         private void Init()
         {
-            _inputActionAsset = _playerInput.actions;
+            bool setting = PlayerSettings.Instance.IsUsingController;
+            
+            _playerInput.SwitchCurrentActionMap(setting ? "Controller" : "Player");
+            _playerControlsActions = _playerInput.actions.actionMaps[setting ? 1 : 0];
         }
 
         private void AddListeners()
         {
-            _inputActionAsset["Shoot"].performed += Shoot;
+            _playerControlsActions["Shoot"].performed += Shoot;
+            _playerControlsActions["Reset"].performed += Reset;
         }
         
         private void RemoveListeners()
         {
-            _inputActionAsset["Shoot"].performed -= Shoot;
+            _playerControlsActions["Shoot"].performed -= Shoot;
+            _playerControlsActions["Reset"].performed -= Reset;
         }
         
         #region Context
 
         private void Shoot(InputAction.CallbackContext context) => _shooting.ActivateShoot();
+
+        private void Reset(InputAction.CallbackContext context) => _turner.ResetRotation();
 
         #endregion
     }

@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba45bee505b149e481a6db5ae9f29ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 7.5
   penetration: 2
   despawnDistance: 10
   targetTag: Hittables

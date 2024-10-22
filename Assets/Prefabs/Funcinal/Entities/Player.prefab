@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnObject: {fileID: 1957059639502110017}
   speed: 100
+  resetSpeed: 0.5
   minRotation: -45
   maxRotation: 45
 --- !u!114 &6284112021361366979
@@ -248,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3639597337197506108, guid: 71f5d3ab92c912a49bcbb7d268d4aba9, type: 3}
-  shootInterval: 1
+  shootInterval: 0.45
   firePoints:
   - {fileID: 2299191278004448919}
 --- !u!1 &6118454793570355784

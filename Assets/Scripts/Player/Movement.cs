@@ -14,9 +14,9 @@ namespace Player
         private Rigidbody2D _rigidbody2D;
         private Vector2 _currentVelocity;
         
-        // This is how I get a require component, is there a better way?
+        // This is how I get a required component, is there a better way?
         private void Awake() => _rigidbody2D = GetComponent<Rigidbody2D>();
-
+        
         public void Move(Vector2 input)
         {
             // change the velocity to the speed value or nothing, depending on input
