@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2724742892994158551}
   - component: {fileID: 6284112021361366979}
   - component: {fileID: 7462411521232510526}
+  - component: {fileID: 1809083742193110941}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -39,6 +40,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1957059639502110017}
+  - {fileID: 1805683506872783965}
+  - {fileID: 6728132988368555282}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7631588401013070137
@@ -219,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnObject: {fileID: 1957059639502110017}
   speed: 100
-  resetSpeed: 0.5
+  resetSpeed: 250
   minRotation: -45
   maxRotation: 45
 --- !u!114 &6284112021361366979
@@ -248,10 +251,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0856b5f21154960a7860441db76c309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3639597337197506108, guid: 71f5d3ab92c912a49bcbb7d268d4aba9, type: 3}
-  shootInterval: 0.45
+  bulletPool: {fileID: 1654429682241385553}
+  rocketPool: {fileID: 7813192410731758352}
+  shootIntervalBullet: 0.5
+  shootIntervalRocket: 1
   firePoints:
   - {fileID: 2299191278004448919}
+--- !u!114 &1809083742193110941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531068422500079117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5271ecc4c6d4456298eed7397356ff00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render: {fileID: 959077758354776958}
+  flickerSpeed: 5
+  timeToFlickerFor: 3
+  onStartFlicker:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8327014313253466866}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDoneFlicker:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8327014313253466866}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &6118454793570355784
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +402,98 @@ MonoBehaviour:
   hasParent: 1
   speed: {x: 3, y: 3}
   height: 0.075
+--- !u!1 &7175732367150523892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6728132988368555282}
+  - component: {fileID: 7813192410731758352}
+  m_Layer: 0
+  m_Name: RocketPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6728132988368555282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175732367150523892}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8555833882230918067}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7813192410731758352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175732367150523892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3fc7b3098634f89a3ca2c55b73f6181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1446359559394439528, guid: 081b02bc7b315b6469216b7c61067ccc, type: 3}
+  initialSize: 2
+--- !u!1 &7661634599822651191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805683506872783965}
+  - component: {fileID: 1654429682241385553}
+  m_Layer: 0
+  m_Name: BulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1805683506872783965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661634599822651191}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8555833882230918067}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1654429682241385553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661634599822651191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3fc7b3098634f89a3ca2c55b73f6181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: -3816641254824944448, guid: 71f5d3ab92c912a49bcbb7d268d4aba9, type: 3}
+  initialSize: 4
 --- !u!1 &8269085163578821109
 GameObject:
   m_ObjectHideFlags: 0

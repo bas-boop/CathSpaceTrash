@@ -8,12 +8,13 @@ using Framework.Gameplay;
 namespace Environment.Spawning
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class BaseFallingObject : MonoBehaviour
+    public class FallingObject : MonoBehaviour
     {
         [Header("Tags")]
         [SerializeField, Tag] private string wallTag;
         [SerializeField, Tag] private string shipTag;
         [SerializeField, Tag] private string playerTag;
+        
         [Header("Settings")]
         [SerializeField] private Vector2 speed = Vector2.one;
         [SerializeField] private Vector2 fallDirection = Vector2.down;

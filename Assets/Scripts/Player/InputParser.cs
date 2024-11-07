@@ -65,18 +65,22 @@ namespace Player
         private void AddListeners()
         {
             _playerControlsActions["Shoot"].performed += Shoot;
+            _playerControlsActions["SwitchWeapon"].performed += Switch;
             _playerControlsActions["Reset"].performed += Reset;
         }
         
         private void RemoveListeners()
         {
             _playerControlsActions["Shoot"].performed -= Shoot;
+            _playerControlsActions["SwitchWeapon"].performed -= Switch;
             _playerControlsActions["Reset"].performed -= Reset;
         }
         
         #region Context
 
         private void Shoot(InputAction.CallbackContext context) => _shooting.ActivateShoot();
+
+        private void Switch(InputAction.CallbackContext context) => _shooting.SwitchBullet();
 
         private void Reset(InputAction.CallbackContext context) => _turner.ResetRotation();
 

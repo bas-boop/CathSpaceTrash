@@ -6,13 +6,17 @@ namespace Player
     public sealed class Turner : MonoBehaviour
     {
         [SerializeField] private Transform turnObject;
-        [SerializeField] private float speed = 1;
-        [SerializeField] private float resetSpeed = 0.1f;
+        [SerializeField, Range(1, 500)] private float speed = 1;
+        [SerializeField, Range(1, 500)] private float resetSpeed = 0.1f;
         [SerializeField, Range(0, -180)] private float minRotation = -45f;
         [SerializeField, Range(0, 180)] private float maxRotation = 45f;
         
         private Coroutine _resetRotationCoroutine;
         
+        /// <summary>
+        /// Will turn the player to the direction given.
+        /// </summary>
+        /// <param name="input">The input to turn left or right.</param>
         public void Turn(float input)
         {
             if (input == 0)
@@ -31,9 +35,11 @@ namespace Player
             turnObject.localEulerAngles = new (turnObject.localEulerAngles.x, turnObject.localEulerAngles.y, newZRotation);
         }
 
+        /// <summary>
+        /// Makes a smooth return to the start rotation.
+        /// </summary>
         public void ResetRotation()
         {
-            // Stop any ongoing reset coroutine before starting a new one
             if (_resetRotationCoroutine != null)
                 StopCoroutine(_resetRotationCoroutine);
 
@@ -48,7 +54,7 @@ namespace Player
             if (currentZRotation > 180f)
                 currentZRotation -= 360f;
 
-            // Smoothly interpolate the rotation back to 0
+            // Rotate towards 0 at a constant speed
             while (Mathf.Abs(currentZRotation) > 0.01f)
             {
                 currentZRotation = turnObject.localEulerAngles.z;
@@ -56,13 +62,17 @@ namespace Player
                 if (currentZRotation > 180f)
                     currentZRotation -= 360f;
 
-                float newZRotation = Mathf.LerpAngle(currentZRotation, 0, resetSpeed * Time.deltaTime);
+                // Rotate by a fixed step towards 0 at a constant speed
+                float step = resetSpeed * Time.deltaTime;
+                float newZRotation = Mathf.MoveTowards(currentZRotation, 0, step);
+
+                // Apply the new rotation
                 turnObject.localEulerAngles = new (turnObject.localEulerAngles.x, turnObject.localEulerAngles.y, newZRotation);
 
-                yield return null;
+                yield return null;  // Wait for the next frame
             }
 
-            // Ensure it's set exactly to 0 after smoothing
+            // Ensure the final rotation is exactly 0 after resetting
             turnObject.localEulerAngles = new (turnObject.localEulerAngles.x, turnObject.localEulerAngles.y, 0);
         }
     }

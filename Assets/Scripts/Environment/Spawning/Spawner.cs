@@ -1,44 +1,65 @@
 ﻿using UnityEngine;
 
 using Framework.Gameplay;
+using Random = UnityEngine.Random;
 
 namespace Environment.Spawning
 {
     public sealed class Spawner : MonoBehaviour
     {
-        [Header("References")]
         [SerializeField] private Score score;
-        [SerializeField] private BaseFallingObject[] fallingObjects;
-        [Header("Settings")]
-        [SerializeField] private float waitUntilStartSpawning = 1;
-        [SerializeField] private float spawnTime = 1;
         [SerializeField] private Rect spawnArea;
+        [SerializeField] private Wave[] waves;
 
         private int _objectsDestroyed;
         private int _currentObjectToSpawn;
-        
-        private void Start() => InvokeRepeating(nameof(SpawnNextObject), waitUntilStartSpawning, spawnTime);
+        private int _currentWave = -1;
+        private int _totalObjects;
+
+        private void Awake()
+        {
+            for (int i = 0; i < waves.Length; i++)
+                for (int j = 0; j < waves[i].fallingObjects.Length; j++)
+                    _totalObjects++;
+        }
+
+        private void Start() => SpawnNextWave();
 
         public void Check()
         {
             _objectsDestroyed++;
 
-            if (_objectsDestroyed == fallingObjects.Length) 
+            if (_objectsDestroyed == _totalObjects)
                 score.CheckIfWon();
         }
         
         private void SpawnNextObject()
         {
-            BaseFallingObject instance = Instantiate(fallingObjects[_currentObjectToSpawn], GetRandomSpawnPosition(),
-                                                        transform.rotation, transform);
+            FallingObject instance = Instantiate(waves[_currentWave].fallingObjects[_currentObjectToSpawn],
+                GetRandomSpawnPosition(), transform.rotation, transform);
             
             instance.Setup(this, score, score.IncreaseScore);
             _currentObjectToSpawn++;
 
-            if (_currentObjectToSpawn == fallingObjects.Length)
-                CancelInvoke();
+            if (_currentObjectToSpawn != waves[_currentWave].fallingObjects.Length)
+                return;
+            
+            CancelInvoke();
+            SpawnNextWave();
         }
 
+        private void SpawnNextWave()
+        {
+            _currentObjectToSpawn = 0;
+            _currentWave++;
+            
+            if (waves.Length == _currentWave)
+                return;
+            
+            Wave currentWave = waves[_currentWave];
+            InvokeRepeating(nameof(SpawnNextObject), currentWave.timeUntilSpawn, currentWave.spawningTime);
+        }
+        
         private Vector2 GetRandomSpawnPosition()
         {
             Vector2 randomSpawnPosition = new (Random.Range(-spawnArea.width, spawnArea.width) + transform.position.x,

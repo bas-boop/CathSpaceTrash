@@ -62,8 +62,15 @@ namespace Framework.Gameplay
             onResurrect?.Invoke();
         }
         
+        /// <summary>
+        /// Add a action to the Die Unity event.
+        /// </summary>
+        /// <param name="target">Action to add.</param>
         public void AddListenerToDieEvent(UnityAction target) => onDie.AddListener(target);
 
+        /// <summary>
+        /// Destroy this gameObject. Used for Unity events.
+        /// </summary>
         public void DestroySelf() => Destroy(gameObject);
 
         private void Die()

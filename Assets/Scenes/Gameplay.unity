@@ -485,8 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc9744346b34c229cc008dffeba3017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpawnPosition: {fileID: 1485085610}
-  backupPlayer: {fileID: 6398558865630713109, guid: ee4028a320b6863428b28bd7ea93cbcc, type: 3}
 --- !u!4 &164129744
 Transform:
   m_ObjectHideFlags: 0
@@ -2373,6 +2371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485085610}
+  - component: {fileID: 1485085611}
   m_Layer: 0
   m_Name: PlayerSpawn
   m_TagString: Untagged
@@ -2395,6 +2394,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 164129744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1485085611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485085609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc9b465044a40cb8305766fa797e05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawnPosition: {fileID: 1485085610}
+  backupPlayer: {fileID: 6398558865630713109, guid: ee4028a320b6863428b28bd7ea93cbcc, type: 3}
+  spaceCraftAmount: 3
+  waitTimeToSpawnNewSpacecraft: 2
+  onNoMoreSpaceCrafts:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2139113608}
+        m_TargetAssemblyTypeName: Framework.Gameplay.Score, Assembly-CSharp
+        m_MethodName: CheckIfWon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1648756444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2440,18 +2470,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: {fileID: 2139113608}
-  fallingObjects:
-  - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
-  - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
-  - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
-  waitUntilStartSpawning: 1
-  spawnTime: 1
   spawnArea:
     serializedVersion: 2
     x: 0
     y: 0
     width: 9
     height: 5
+  waves:
+  - timeUntilSpawn: 3
+    spawningTime: 5
+    fallingObjects:
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+  - timeUntilSpawn: 10
+    spawningTime: 4
+    fallingObjects:
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+  - timeUntilSpawn: 2
+    spawningTime: 1
+    fallingObjects:
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+  - timeUntilSpawn: 2
+    spawningTime: 1
+    fallingObjects:
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+  - timeUntilSpawn: 2
+    spawningTime: 3
+    fallingObjects:
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+  - timeUntilSpawn: 2
+    spawningTime: 1
+    fallingObjects:
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
+    - {fileID: 2029160553496970516, guid: f63fec54838982b40b4105182f56bd0b, type: 3}
 --- !u!1 &1732503129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,7 +2839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  scoreThreshold: 0
+  scoreThreshold: 14
   onScoreUpdate:
     m_PersistentCalls:
       m_Calls:
