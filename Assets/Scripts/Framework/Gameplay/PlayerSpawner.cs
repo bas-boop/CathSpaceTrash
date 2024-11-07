@@ -18,7 +18,16 @@ namespace Framework.Gameplay
 
         private void Start() => StartCoroutine(SpawnSpacecraft(true));
 
-        public void SpawnNewSpaceCraft() => StartCoroutine(SpawnSpacecraft(false));
+        public void SpawnNewSpaceCraft()
+        {
+            if (spaceCraftAmount <= 0)
+            {
+                onNoMoreSpaceCrafts?.Invoke();
+                return;
+            }
+            
+            StartCoroutine(SpawnSpacecraft(false));
+        }
 
         /// <summary>
         /// Spawns the player, if no custamiztion has acourd the backup will be spawne.
@@ -30,9 +39,6 @@ namespace Framework.Gameplay
         {
             if (!isFirstSpacecraft)
                 yield return new WaitForSeconds(waitTimeToSpawnNewSpacecraft);
-            
-            if (spaceCraftAmount == 0) 
-                onNoMoreSpaceCrafts?.Invoke();
             
             GameObject savedShip = SkinManager.Instance.GetShip();
             GameObject spaceCraft = Instantiate(savedShip == null

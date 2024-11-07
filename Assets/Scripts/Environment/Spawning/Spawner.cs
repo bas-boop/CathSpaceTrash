@@ -25,6 +25,14 @@ namespace Environment.Spawning
 
         private void Start() => SpawnNextWave();
 
+        public void SetScoreCorrectAfterTotalDeath()
+        {
+            int objectsLeft = _totalObjects - _objectsDestroyed;
+            
+            for (int i = 0; i < objectsLeft; i++) 
+                score.DecreaseScore();
+        }
+
         public void Check()
         {
             _objectsDestroyed++;
