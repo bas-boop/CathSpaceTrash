@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 using Framework.Gameplay;
-using Random = UnityEngine.Random;
 
 namespace Environment.Spawning
 {
@@ -25,6 +25,10 @@ namespace Environment.Spawning
 
         private void Start() => SpawnNextWave();
 
+        /// <summary>
+        /// When there are no more spacecrafts left the lose condition is met.
+        /// But the score should be updated to all other crew that are not saved.
+        /// </summary>
         public void SetScoreCorrectAfterTotalDeath()
         {
             int objectsLeft = _totalObjects - _objectsDestroyed;
@@ -33,6 +37,9 @@ namespace Environment.Spawning
                 score.DecreaseScore();
         }
 
+        /// <summary>
+        /// Check if we have destroyed all objects
+        /// </summary>
         public void Check()
         {
             _objectsDestroyed++;
@@ -41,6 +48,9 @@ namespace Environment.Spawning
                 score.CheckIfWon();
         }
         
+        /// <summary>
+        /// Looking at the correct wave and then spawning the next object.
+        /// </summary>
         private void SpawnNextObject()
         {
             FallingObject instance = Instantiate(waves[_currentWave].fallingObjects[_currentObjectToSpawn],
@@ -56,6 +66,9 @@ namespace Environment.Spawning
             SpawnNextWave();
         }
 
+        /// <summary>
+        /// Set the next wave to be the current one, if there is a next one.
+        /// </summary>
         private void SpawnNextWave()
         {
             _currentObjectToSpawn = 0;
@@ -68,6 +81,10 @@ namespace Environment.Spawning
             InvokeRepeating(nameof(SpawnNextObject), currentWave.timeUntilSpawn, currentWave.spawningTime);
         }
         
+        /// <summary>
+        /// Get a random spawn position in the rect.
+        /// </summary>
+        /// <returns>Returns a random position within the rect.</returns>
         private Vector2 GetRandomSpawnPosition()
         {
             Vector2 randomSpawnPosition = new (Random.Range(-spawnArea.width, spawnArea.width) + transform.position.x,

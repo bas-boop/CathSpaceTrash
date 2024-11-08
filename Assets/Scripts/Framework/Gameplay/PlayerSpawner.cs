@@ -18,6 +18,9 @@ namespace Framework.Gameplay
 
         private void Start() => StartCoroutine(SpawnSpacecraft(true));
 
+        /// <summary>
+        /// Spawn a new spacecraft for the player to use, if any are left.
+        /// </summary>
         public void SpawnNewSpaceCraft()
         {
             if (spaceCraftAmount <= 0)
@@ -30,7 +33,7 @@ namespace Framework.Gameplay
         }
 
         /// <summary>
-        /// Spawns the player, if no custamiztion has acourd the backup will be spawne.
+        /// Spawns the player, if no customization has accord the backup will be spawn.
         /// Can be delayed via the bool param.
         /// </summary>
         /// <param name="isFirstSpacecraft">Check if this the first spacecraft is.</param>

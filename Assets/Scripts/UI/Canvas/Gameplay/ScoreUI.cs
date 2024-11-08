@@ -5,6 +5,9 @@ using Framework.Gameplay;
 
 namespace UI.Canvas.Gameplay
 {
+    /// <summary>
+    /// Shows the score on some text via score system reference;
+    /// </summary>
     public sealed class ScoreUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text scoreText;

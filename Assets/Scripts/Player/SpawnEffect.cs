@@ -21,6 +21,9 @@ namespace Player
 
         public void SetSpawner(PlayerSpawner parent) => _spawner = parent;
 
+        /// <summary>
+        /// Starts the flicker coroutine and invokes the onStartFlicker event.
+        /// </summary>
         public void Flicker()
         {
             onStartFlicker?.Invoke();

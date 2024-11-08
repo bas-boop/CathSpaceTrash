@@ -12,6 +12,9 @@ namespace Framework.Gameplay
         [SerializeField] private UnityEvent onGameWon = new();
         [SerializeField] private UnityEvent onGameLose = new();
 
+        /// <summary>
+        /// Check if the win condition is met and call the correct unity event.
+        /// </summary>
         public void CheckIfWon()
         {
             UnityEvent gameStateEvent = score >= scoreThreshold ? onGameWon : onGameLose;

@@ -2,6 +2,9 @@
 
 namespace Framework.DebugSystem
 {
+    /// <summary>
+    /// This class in mostly used to give unity events a debug option.
+    /// </summary>
     public class Messenger : MonoBehaviour
     {
         /// <summary>

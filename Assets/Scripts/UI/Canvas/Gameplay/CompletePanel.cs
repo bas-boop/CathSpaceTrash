@@ -11,6 +11,10 @@ namespace UI.Canvas.Gameplay
         [SerializeField] private Color winColor = Color.green;
         [SerializeField] private Color loseColor = Color.red;
 
+        /// <summary>
+        /// Turn on the panel end if win or lose condition is met.
+        /// </summary>
+        /// <param name="hasWon">Makes it green if won, otherwise makes it red.</param>
         public void Complete(bool hasWon)
         {
             background.color = hasWon ? winColor : loseColor;

@@ -5,12 +5,10 @@ using Framework;
 
 namespace Player
 {
-    /// <summary>
-    /// Make comments
-    /// </summary>
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Movement))]
     [RequireComponent(typeof(Turner))]
+    [RequireComponent(typeof(Shooting))]
     public sealed class InputParser : MonoBehaviour
     {
         private PlayerInput _playerInput;
@@ -23,9 +21,12 @@ namespace Player
         private void Awake()
         {
             GetReferences();
-            Init();
+            InitActionMap();
         }
 
+        /// <summary>
+        /// Reads and gives input for action that are held down.
+        /// </summary>
         private void FixedUpdate()
         {
             Vector2 moveInput = _playerControlsActions["Move"].ReadValue<Vector2>();
@@ -39,10 +40,14 @@ namespace Player
         
         private void OnDisable() => RemoveListeners();
 
+        /// <summary>
+        /// Removes listeners, applies action map and add listeners back again.
+        /// Used for switch in pause menu.
+        /// </summary>
         public void SwitchActionMap()
         {
             RemoveListeners();
-            Init();
+            InitActionMap();
             AddListeners();
         }
         
@@ -54,7 +59,11 @@ namespace Player
             _shooting = GetComponent<Shooting>();
         }
 
-        private void Init()
+        /// <summary>
+        /// Will set the action map with the correct control hardware.
+        /// Keyboard & mouse or controller.
+        /// </summary>
+        private void InitActionMap()
         {
             bool setting = PlayerSettings.Instance.IsUsingController;
             

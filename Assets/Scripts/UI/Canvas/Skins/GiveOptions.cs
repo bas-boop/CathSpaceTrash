@@ -1,5 +1,6 @@
-﻿using Framework.Customization;
-using UnityEngine;
+﻿using UnityEngine;
+
+using Framework.Customization;
 
 namespace UI.Canvas.Skins
 {

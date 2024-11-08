@@ -41,7 +41,7 @@ namespace Player
         }
 
         /// <summary>
-        /// This will switch the current bullet to shoot to the different one. Also, the shoot speed will be switched.
+        /// This will switch the current pool to shoot form to the other pool. Also, the shoot speed will be switched.
         /// </summary>
         public void SwitchBullet()
         {

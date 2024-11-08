@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 namespace Framework
 {
+    /// <summary>
+    /// A simple-to-use scene switcher class.
+    /// </summary>
     public sealed class SceneSwitcher : Singleton<SceneSwitcher>
     {
         private const double ASYNC_CONVERTER = 0.9;

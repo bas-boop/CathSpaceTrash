@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.6}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!58 &8327014313253466866
 CircleCollider2D:
@@ -206,8 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  acceleration: 5
-  deceleration: 2
+  acceleration: 9
+  deceleration: 5
 --- !u!114 &2724742892994158551
 MonoBehaviour:
   m_ObjectHideFlags: 0

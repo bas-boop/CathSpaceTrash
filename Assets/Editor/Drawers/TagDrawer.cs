@@ -5,6 +5,9 @@ using Framework.Attributes;
 
 namespace Editor.Drawers
 {
+    /// <summary>
+    /// Strings will be shown as a dropdown menu with the tags options set in this unity project.
+    /// </summary>
     [CustomPropertyDrawer(typeof(TagAttribute))]
     public class TagDrawer : PropertyDrawer
     {

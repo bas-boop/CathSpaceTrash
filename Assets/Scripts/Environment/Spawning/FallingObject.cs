@@ -39,6 +39,12 @@ namespace Environment.Spawning
 
         private void OnDestroy() => _spawner.Check();
 
+        /// <summary>
+        /// Assigns systems and gives the die event a function to listen to.
+        /// </summary>
+        /// <param name="sender">The spawner we are spawning form.</param>
+        /// <param name="score">The score system.</param>
+        /// <param name="target">Function to add to die event.</param>
         public void Setup(Spawner sender, Score score, UnityAction target)
         {
             _spawner = sender;
@@ -46,6 +52,9 @@ namespace Environment.Spawning
             GetComponent<Health>().AddListenerToDieEvent(target);
         }
 
+        /// <summary>
+        /// Handels collision with the walls, should invert the horizontal speed.
+        /// </summary>
         private void HandelCollisionWall()
         {
             Vector2 newDirection = _rigidbody2D.velocity;
@@ -53,12 +62,18 @@ namespace Environment.Spawning
             _rigidbody2D.velocity = newDirection;
         }
 
+        /// <summary>
+        /// Handels collision with mother ship, should decrease score and destroy itself.
+        /// </summary>
         private void HandelCollisionShip()
         {
             _scoreSystem.DecreaseScore();
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Handels collision with player, should destroy both.
+        /// </summary>
         private void HandelCollisionPlayer(Collider2D other)
         {
             Destroy(gameObject);

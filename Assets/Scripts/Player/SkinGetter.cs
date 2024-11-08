@@ -8,7 +8,9 @@ namespace Player
     {
         [SerializeField] private SpriteRenderer[] flames;
 
-        private void Start()
+        private void Start() => ApplySettingToFlames();
+
+        private void ApplySettingToFlames()
         {
             Sprite target = SkinManager.Instance.GetFlame();
 

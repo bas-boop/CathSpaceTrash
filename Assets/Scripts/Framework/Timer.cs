@@ -3,10 +3,11 @@ using UnityEngine.Events;
 
 namespace Framework
 {
+    /// <summary>
+    /// A timer class that can be used for any occasion where a timer is needed.
+    /// </summary>
     public sealed class Timer : MonoBehaviour
     {
-        private const int FULL_PERCENTAGE = 100;
-
         [SerializeField] private bool isCountingUp;
         [SerializeField] private bool canCountOnStart;
         [SerializeField] private bool canCount;
@@ -76,7 +77,11 @@ namespace Framework
         /// Calculates the percentage of the current timer relative to the progress.
         /// </summary>
         /// <returns>Return a number between 0-1</returns>
-        public float GetCurrentTimerPercentage() => _currentTimer / FULL_PERCENTAGE;
+        public float GetCurrentTimerPercentage()
+        {
+            float timerLimit = isCountingUp ? timerThreshold : startingTime;
+            return Mathf.Clamp01(_currentTimer / timerLimit);
+        }
 
         private void Counting()
         {

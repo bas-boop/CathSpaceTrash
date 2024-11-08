@@ -44,6 +44,9 @@ namespace Editor.Drawers
             _onGroundLeave = serializedObject.FindProperty("onGroundLeave");
         }
 
+        /// <summary>
+        /// Display every serialized variable.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
